@@ -31,5 +31,7 @@ module PizzaManager
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
   end
 end
