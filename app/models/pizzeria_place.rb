@@ -6,6 +6,8 @@ class PizzeriaPlace < ApplicationRecord
   validates_uniqueness_of :name
   validate :opening_before_closing
 
+  has_one :user
+
   private
 
   def opening_before_closing
