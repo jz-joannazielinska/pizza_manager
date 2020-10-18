@@ -2,7 +2,7 @@
 
 describe PizzeriaPlace, type: :model do
   describe 'validations' do
-    subject { create(:pizzeria_place) }
+    subject { create(:pizzeria_place, user_id: create(:user).id) }
 
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:opens_at) }

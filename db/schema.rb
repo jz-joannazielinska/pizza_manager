@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_17_175042) do
+ActiveRecord::Schema.define(version: 2020_10_18_120329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2020_10_17_175042) do
     t.uuid "pizzeria_place_id"
     t.uuid "pizza_id"
     t.index ["pizza_id"], name: "index_pizzeria_menus_on_pizza_id"
+    t.index ["pizzeria_place_id", "pizza_id"], name: "index_pizzeria_menus_on_pizzeria_place_id_and_pizza_id", unique: true
     t.index ["pizzeria_place_id"], name: "index_pizzeria_menus_on_pizzeria_place_id"
   end
 
