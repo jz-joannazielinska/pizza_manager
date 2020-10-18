@@ -36,13 +36,15 @@ class PizzeriaPlaces < Grape::API
     end
 
     post do
-      PizzeriaPlace.create!({
-        name: params[:name],
-        address: params[:address],
-        opens_at: Time.parse(params[:opens_at]),
-        closes_at: Time.parse(params[:closes_at]),
-        user_id: params[:user_id]
-      })
+      PizzeriaPlace.create!(
+        {
+          name: params[:name],
+          address: params[:address],
+          opens_at: Time.parse(params[:opens_at]),
+          closes_at: Time.parse(params[:closes_at]),
+          user_id: params[:user_id]
+        }
+      )
       status 200
     end
 
@@ -67,7 +69,7 @@ class PizzeriaPlaces < Grape::API
     put do
       pizzeria_place = PizzeriaPlace.find(params[:pizzeria_place_id])
       params.delete(:pizzeria_place_id)
-      new_attributes = params.delete_if { |key, value| value.blank? }
+      new_attributes = params.delete_if { |_, value| value.blank? }
       pizzeria_place.update!(new_attributes)
       status 200
     end

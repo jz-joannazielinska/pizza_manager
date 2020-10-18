@@ -12,12 +12,12 @@ class Pizzas < Grape::API
 
     get do
       ids = PizzeriaMenu.where(pizzeria_place_id: params[:pizzeria_place_id]).to_a
-        .map{ |pm| pm.pizza_id }
+                        .map(&:pizza_id)
       Pizza.where(id: ids).to_json
     end
   end
 
-  namespace :pizza do
+  namespace :pizza do # rubocop:disable Metrics/BlockLength
     desc 'Get information about specific pizza'
     params do
       requires :pizza_id, type: String, desc: 'uuid of pizza'
@@ -35,11 +35,14 @@ class Pizzas < Grape::API
     end
 
     post do
-      Pizza.create!({
-        name: params[:name],
-        price: params[:price],
-        ingridients: params[:ingridients]
-      })
+      Pizza.create!(
+        {
+          name: params[:name],
+          price: params[:price],
+          ingridients: params[:ingridients]
+        }
+      )
+
       status 200
     end
 

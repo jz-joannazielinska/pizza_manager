@@ -12,7 +12,7 @@ class PizzeriaMenus < Grape::API
 
     get do
       pizza_ids = PizzeriaMenu.where(pizzeria_place_id: params[:pizzeria_place_id]).to_a
-        .map { |pm| pm.pizza_id }
+                              .map(&:pizza_id)
       Pizza.where(id: pizza_ids).to_json
     end
 
@@ -23,10 +23,12 @@ class PizzeriaMenus < Grape::API
     end
 
     post do
-      PizzeriaMenu.create!({
-        pizzeria_place_id: params[:pizzeria_place_id],
-        pizza_id: params[:pizza_id]
-      })
+      PizzeriaMenu.create!(
+        {
+          pizzeria_place_id: params[:pizzeria_place_id],
+          pizza_id: params[:pizza_id]
+        }
+      )
       status 200
     end
 
@@ -38,12 +40,13 @@ class PizzeriaMenus < Grape::API
 
     delete do
       record = PizzeriaMenu.find_by(
-                pizzeria_place_id: params[:pizzeria_place_id],
-                pizza_id: params[:pizza_id])
-        error!({error: 'Record not found'}, 400) if record.nil?
+        pizzeria_place_id: params[:pizzeria_place_id],
+        pizza_id: params[:pizza_id]
+      )
+      error!({ error: 'Record not found' }, 400) if record.nil?
 
-        record.destroy!
-        status 200
+      record.destroy!
+      status 200
     end
   end
 end
