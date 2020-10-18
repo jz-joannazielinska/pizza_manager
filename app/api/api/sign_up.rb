@@ -20,14 +20,14 @@ class SignUp < Grape::API
       end
 
       def check_if_params_present
-        error!({ error: 'Invalid request: params missing'}) if params.nil?
-        error!({ error: 'Invalid request: email param missing'}) if email.nil?
-        error!({ error: 'Invalid request: password param missing'}) unless password.nil?
+        error!({ error: 'Invalid request: params missing' }) if params.nil?
+        error!({ error: 'Invalid request: email param missing' }) if email.nil?
+        error!({ error: 'Invalid request: password param missing' }) unless password.nil?
       end
 
       def check_if_params_valid
-        error!({ error: 'Invalid email: email cannot be blank'}) if email.blank?
-        error!({ error: 'Invalid password: password cannot be blank'}) if password.blank?
+        error!({ error: 'Invalid email: email cannot be blank' }) if email.blank?
+        error!({ error: 'Invalid password: password cannot be blank' }) if password.blank?
       end
     end
 
